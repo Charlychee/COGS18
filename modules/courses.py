@@ -1,6 +1,7 @@
 import pydot
 import json
 import os
+import random
 
 module_dir = os.path.dirname(__file__)
 rel_path = '../UCSD_courses.json'
@@ -11,7 +12,10 @@ with open(abs_file_path) as f:
     outer list. Concurrent courses are tagged with an asterisk (*) after the course name.
     '''
     COURSE_DICT = json.load(f)
-
+AVAILABLE_COLORS = ['aquamarine', 'aquamarine3', 'aquamarine4', 'blue', 'blue4', 'cadetblue1', 'cadetblue3',
+                    'cadetblue4', 'cornflowerblue', 'cyan', 'cyan3', 'cyan4', 'darkturquoise', 'deepskyblue',
+                    'deepskyblue4', 'dodgerblue', 'dodgerblue3', 'royalblue', 'royalblue4', 'skyblue', 'turqouise4']
+COLORS_INDEX = 0
 
 def remove_star(string):
     """
@@ -31,7 +35,7 @@ def find_next_node(graph, course, complete):
     :param course: The course name which we are adding its prerequisite courses to
     :param complete: The list of courses that have already been added to the tree. This is to prevent infinite loops.
     """
-
+    global COLORS_INDEX
     # Add course to complete list to signify traversal and to not traverse again
     complete.append(course)
     try:
@@ -45,8 +49,14 @@ def find_next_node(graph, course, complete):
     for prereq in COURSE_DICT[course]:
         if isinstance(prereq, list):
             # OR COURSES
+            # Choose different colors to differentiate the OR sets
+            or_color = AVAILABLE_COLORS[COLORS_INDEX]
+            COLORS_INDEX += 1
+            if COLORS_INDEX > len(AVAILABLE_COLORS) - 1:
+                COLORS_INDEX = 0
+
             for or_req in prereq:
-                add_course(graph, or_req, course, 'blue')
+                add_course(graph, or_req, course, or_color)
                 or_req = remove_star(or_req)
                 if or_req in complete:
                     # Already traversed node, skip traversal
@@ -91,5 +101,4 @@ def get_prereqs(course_name):
     graph.add_node(target)
     complete = []
     find_next_node(graph, course_name, complete)
-
     return graph
