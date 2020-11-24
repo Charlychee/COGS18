@@ -13,25 +13,25 @@ with open(abs_file_path) as f:
     COURSE_DICT = json.load(f)
 
 
-def find_next_node(graph, parent):
+def find_next_node(graph, course, complete):
     """
     Adds all the prerequisite courses to the graph and their prerequisites, recursively.
     :param graph: The pydot.Dot object which holds the tree
-    :param parent: The course node which we are adding its prerequisite classes to
+    :param course: The course name which we are adding its prerequisite classes to
+    :param complete: The list of courses that have already been added to the tree. This is to prevent infinite loops.
     """
-    course = parent.get_name()
     if COURSE_DICT[course] is None:
         return
     for prereq in COURSE_DICT[course]:
         if isinstance(prereq, list):
             # OR COURSES
             for or_req in prereq:
-                child = add_course(graph, or_req, parent, 'blue')
-                find_next_node(graph, child)
+                add_course(graph, or_req, course, 'blue')
+                find_next_node(graph, or_req, complete)
         else:
             # AND COURSES
-            child = add_course(graph, prereq, parent, 'red')
-            find_next_node(graph, child)
+            add_course(graph, prereq, course, 'red')
+            find_next_node(graph, prereq, complete)
 
 
 def add_course(graph, course, parent, color):
@@ -39,9 +39,8 @@ def add_course(graph, course, parent, color):
     Creates child node for course and attaches it to the parent node in the graph given with the color given.
     :param graph: The pydot.Dot object which holds the tree
     :param course: A string with the child's course name
-    :param parent: The parent node we want to attach the child node to
+    :param parent: The parent name we want to attach the child node to
     :param color: The color we want to connect the nodes with (depends on type of prereq AND/OR/COREQ)
-    :return child: The child node we created, representing the prerequisite of the parent course
     """
     if course[-1] == '*':
         # Concurrent course
@@ -49,10 +48,8 @@ def add_course(graph, course, parent, color):
         course = course[:-1]
     child = pydot.Node(course)
     graph.add_node(child)
-    edge = pydot.Edge(parent, child, color=color)
+    edge = pydot.Edge(parent, course, color=color)
     graph.add_edge(edge)
-    return child
-
 
 
 def get_prereqs(course_name):
@@ -65,6 +62,7 @@ def get_prereqs(course_name):
     graph = pydot.Dot(graph_type='digraph')
     target = pydot.Node(course_name)
     graph.add_node(target)
-    find_next_node(graph, target)
+    complete = []
+    find_next_node(graph, course_name, complete)
 
     return graph
