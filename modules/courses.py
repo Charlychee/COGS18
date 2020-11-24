@@ -12,9 +12,9 @@ with open(abs_file_path) as f:
     outer list. Concurrent courses are tagged with an asterisk (*) after the course name.
     '''
     COURSE_DICT = json.load(f)
-AVAILABLE_COLORS = ['aquamarine', 'aquamarine3', 'aquamarine4', 'blue', 'blue4', 'cadetblue1', 'cadetblue3',
-                    'cadetblue4', 'cornflowerblue', 'cyan', 'cyan3', 'cyan4', 'darkturquoise', 'deepskyblue',
-                    'deepskyblue4', 'dodgerblue', 'dodgerblue3', 'royalblue', 'royalblue4', 'skyblue', 'turqouise4']
+AVAILABLE_COLORS = ['aquamarine', 'aquamarine3', 'aquamarine4', 'blue', 'cadetblue1', 'cadetblue3', 'cadetblue4',
+                    'cornflowerblue', 'cyan', 'cyan3', 'cyan4', 'darkturquoise', 'deepskyblue', 'deepskyblue4',
+                    'dodgerblue', 'dodgerblue3', 'royalblue', 'skyblue', 'turqouise4']
 COLORS_INDEX = 0
 
 def remove_star(string):
