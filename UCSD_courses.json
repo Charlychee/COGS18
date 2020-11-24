@@ -1,0 +1,18 @@
+{
+  "COGS108" : [["CSE11","CSE8A","COGS18","DSC10","MAE8"]],
+  "COGS18" : [],
+  "DSC10" : [],
+  "MAE8" : ["MATH20A","MATH20B"],
+  "MATH20A" : [],
+  "MATH20B" : [],
+  "CSE100" : ["CSE12","CSE15L",["CSE21","MATH154","MATH184A"],["CSE5A","CSE30","ECE15","MAE9"]],
+  "CSE30" : ["CSE12","CSE15L"],
+  "CSE21" : [["CSE20","MATH15A"]],
+  "CSE20": [["COGS7","CSE8B","CSE11"]],
+  "CSE12" : [["CSE8B","CSE11"],"CSE15L*"],
+  "CSE15L" : [["CSE8B","CSE11"],"CSE12*"],
+  "CSE11" : [],
+  "CSE8B" : ["CSE8A"],
+  "CSE8A" : [],
+  "CSE5A" : []
+}
