@@ -12,7 +12,5 @@
   "CSE12" : [["CSE8B","CSE11"],"CSE15L*"],
   "CSE15L" : [["CSE8B","CSE11"],"CSE12*"],
   "CSE11" : [],
-  "CSE8B" : ["CSE8A"],
-  "CSE8A" : [],
-  "CSE5A" : []
+  "CSE8B" : ["CSE8A"]
 }
