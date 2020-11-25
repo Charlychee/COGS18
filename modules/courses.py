@@ -1,20 +1,18 @@
 import pydot
 import json
 import os
-import random
 
 # Lines 8-10 are taken from https://stackoverflow.com/questions/7165749/open
-# -file-in-a-relative-location-in-python
+# -file-in-a-relative-location-in-python with slight modifications to the path
 module_dir = os.path.dirname(__file__)
 rel_path = '../UCSD_courses.json'
 abs_file_path = os.path.join(module_dir, rel_path)
-
+'''
+UCSD_courses.json should be formatted with ANDs as each index of the list.
+ORs are placed into a list in place of the AND indexes. Concurrent courses are
+tagged with an asterisk (*) after the course name.
+'''
 with open(abs_file_path) as f:
-    '''
-    UCSD_courses.json should be formatted with ANDs as each index of the list.
-    ORs are placed into a list within the outer list. Concurrent courses are
-    tagged with an asterisk (*) after the course name.
-    '''
     COURSE_DICT = json.load(f)
 AVAILABLE_COLORS = ['aquamarine', 'aquamarine3', 'aquamarine4', 'blue',
                     'cadetblue1', 'cadetblue3', 'cadetblue4', 'cornflowerblue',
@@ -102,7 +100,7 @@ def add_course(graph, course, parent, color):
     graph.add_edge(edge)
 
 
-def get_prereqs(course_name):
+def get_prereqs(course_name=None):
     """
     Main entry point -- Runs all code to create a tree of prerequisites
     necessary to take a course.
@@ -111,6 +109,12 @@ def get_prereqs(course_name):
     :return graph: The pydot.Dot object which holds the tree of the course
                    and all its prereqs
     """
+    if course_name is None:
+        course_name = input('Enter the course you would like to check: ')
+    if course_name not in COURSE_DICT:
+        course_name = 'This course has not been added to UCSD_courses.json\n' \
+                      'Please update it and try again.'
+
     graph = pydot.Dot(graph_type='digraph')
     target = pydot.Node(course_name)
     graph.add_node(target)
