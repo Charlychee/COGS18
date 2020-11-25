@@ -14,11 +14,11 @@ tagged with an asterisk (*) after the course name.
 '''
 with open(abs_file_path) as f:
     COURSE_DICT = json.load(f)
-AVAILABLE_COLORS = ['aquamarine', 'aquamarine3', 'aquamarine4', 'blue',
-                    'cadetblue1', 'cadetblue3', 'cadetblue4', 'cornflowerblue',
-                    'cyan', 'cyan3', 'cyan4', 'darkturquoise', 'deepskyblue',
-                    'deepskyblue4', 'dodgerblue', 'dodgerblue3', 'royalblue',
-                    'skyblue', 'turqouise4']
+AVAILABLE_COLORS = ['blue', 'cadetblue1', 'cadetblue3', 'cadetblue4',
+                    'cornflowerblue', 'cyan', 'cyan3', 'cyan4',
+                    'darkturquoise', 'deepskyblue', 'deepskyblue4',
+                    'dodgerblue', 'dodgerblue3', 'royalblue',
+                    'skyblue', 'turquoise4']
 COLORS_INDEX = 0
 
 def remove_star(string):
