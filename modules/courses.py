@@ -29,6 +29,7 @@ def reset_dict():
     with open(abs_file_path) as f:
         COURSE_DICT = json.load(f)
 
+
 def remove_star(string):
     """
     Removes star from end of string if it exists and returns the resulting

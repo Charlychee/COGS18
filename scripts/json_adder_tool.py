@@ -2,6 +2,7 @@ import json
 import os
 import time
 
+
 module_dir = os.path.dirname(__file__)
 backup_path = os.path.join(module_dir, '../backup_courses.json')
 source_path = os.path.join(module_dir, '../UCSD_courses.json')
