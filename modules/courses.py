@@ -12,14 +12,22 @@ UCSD_courses.json should be formatted with ANDs as each index of the list.
 ORs are placed into a list in place of the AND indexes. Concurrent courses are
 tagged with an asterisk (*) after the course name.
 '''
-with open(abs_file_path) as f:
-    COURSE_DICT = json.load(f)
+COURSE_DICT = dict()
 AVAILABLE_COLORS = ['blue', 'cadetblue1', 'cadetblue3', 'cadetblue4',
                     'cornflowerblue', 'cyan', 'cyan3', 'cyan4',
                     'darkturquoise', 'deepskyblue', 'deepskyblue4',
                     'dodgerblue', 'dodgerblue3', 'royalblue',
                     'skyblue', 'turquoise4']
 COLORS_INDEX = 0
+
+
+def reset_dict():
+    """
+    Reloads COURSE_DICT from json file for cases where json file is updated
+    """
+    global COURSE_DICT
+    with open(abs_file_path) as f:
+        COURSE_DICT = json.load(f)
 
 def remove_star(string):
     """
@@ -109,6 +117,7 @@ def get_prereqs(course_name=None):
     :return graph: The pydot.Dot object which holds the tree of the course
                    and all its prereqs
     """
+    reset_dict()
     if course_name is None:
         course_name = input('Enter the course you would like to check: ')
     if course_name not in COURSE_DICT:

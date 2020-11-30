@@ -25,13 +25,13 @@ def import_json():
         return json.load(source)
 
 
-def export_dict(dict):
+def export_dict(a_dict):
     """
     Takes the dictionary and adds it to the json file.
-    :param dict: The dictionary to convert to json and export into file
+    :param a_dict: The dictionary to convert to json and export into file
     """
     with open(source_path, 'w') as source:
-        json.dump(dict, source, indent=4)
+        json.dump(a_dict, source, indent=4)
 
 
 def add_courses(prereqs):
@@ -41,7 +41,8 @@ def add_courses(prereqs):
     """
     course = input()
     while course != 'done':
-        prereqs.append(course)
+        if course:
+            prereqs.append(course)
         course = input()
     return
 

@@ -1,2 +1,4 @@
-/.idea
-/.pynb_checkpoints
+.idea
+.pynb_checkpoints
+__pycache__
+.pytest_cache
