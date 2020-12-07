@@ -45,7 +45,6 @@ def add_courses(prereqs):
         if course:
             prereqs.append(course)
         course = input()
-    return
 
 
 def adder_tool():
