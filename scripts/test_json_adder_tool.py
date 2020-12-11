@@ -13,6 +13,3 @@ def test_reset_json():
     with open('../UCSD_courses.json', 'r') as f:
         after = f.readlines()
         assert len(after) > 0
-
-
-test_reset_json()
